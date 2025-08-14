@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Typography, TextField, Button, Paper, Grid, Alert, Divider } from '@mui/material';
+import './FinalExamCalculator.css'
 
 const FinalExamCalculator = () => {
   const [currentGrade, setCurrentGrade] = useState('');
