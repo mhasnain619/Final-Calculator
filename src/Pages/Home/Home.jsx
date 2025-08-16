@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Box, Tabs, Tab } from '@mui/material';
 import FinalExamCalculator from '../Calculators/Final-Exam-Calculator/FinalExamCalculator';
-
+import './Home.css'
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -49,13 +49,14 @@ const Home = () => {
           overflowX: 'auto',
           display: 'flex',
           flexDirection:'column',
-          justifyContent:'center'       // enable horizontal scroll
+          justifyContent:'center'      
         }}
       >
         <Box>
           <h1 style={{textAlign:'center'}}>Calculadora de Notas</h1>
         </Box>
         <Tabs
+          className='custom-tabs'
           value={value}
           onChange={handleChange}
           aria-label="custom tabs"
