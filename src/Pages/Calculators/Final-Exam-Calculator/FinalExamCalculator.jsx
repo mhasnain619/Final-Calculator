@@ -72,18 +72,17 @@ const FinalExamCalculator = () => {
   };
 
   return (
-    <Container maxWidth="100%" padding='0px'  sx={{ mt: 3 }}>
+    <Container padding='0px'  sx={{ mt: 3 }}>
       {/* Flex wrapper */}
       <Box
         sx={{
           display: 'flex',
           flexDirection: { xs: 'column', md: 'row' }, // stacked on mobile, row on desktop
           gap: 4,
-          alignItems: 'flex-start',
         }}
       >
         {/* Left (Calculator) */}
-        <Box sx={{ flex: { xs: '1 1 100%', md: '2 1 0' }, minWidth: 0 }}>
+        <Box className='tool'>
           <Paper elevation={2} sx={{ p: 2, borderRadius: 2 }}>
             <Typography variant="h6" gutterBottom>
               ¿Cuánto Necesito para el Final?
@@ -137,7 +136,7 @@ const FinalExamCalculator = () => {
         </Box>
 
         {/* Right (Result) */}
-        <Box sx={{ flex: { xs: '1 1 100%', md: '1 1 0' }, minWidth: 0 }}>
+        <Box className='result' >
           {result && (
             <Alert severity={messageType} variant="filled" sx={{ fontSize: 16, mb: 2 }}>
               {result}
