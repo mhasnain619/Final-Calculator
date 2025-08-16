@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Typography, TextField, Button, Paper, Grid, Alert, Divider } from '@mui/material';
+import { Box, Typography, TextField, Button, Paper, Alert, Container } from '@mui/material';
 import './FinalExamCalculator.css'
 
 const FinalExamCalculator = () => {
@@ -12,7 +12,6 @@ const FinalExamCalculator = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const cg = parseFloat(currentGrade);
     const dg = parseFloat(desiredGrade);
     const cw = parseFloat(currentWeight);
@@ -34,7 +33,9 @@ const FinalExamCalculator = () => {
     let message = '';
 
     if (neededFinalGrade < 0) {
-      message = `¡Felicidades! Ya tienes la nota deseada. Necesitas: ${neededFinalGrade.toFixed(1)}% (puedes obtener 0% y aún así alcanzar tu meta)`;
+      message = `¡Felicidades! Ya tienes la nota deseada. Necesitas: ${neededFinalGrade.toFixed(
+        1
+      )}% (puedes obtener 0% y aún así alcanzar tu meta)`;
       setMessageType('success');
     } else if (neededFinalGrade <= 100) {
       message = `Necesitas obtener: ${neededFinalGrade.toFixed(1)}% en el examen final.`;
@@ -45,9 +46,17 @@ const FinalExamCalculator = () => {
       } else {
         message += ' ¡Parece alcanzable!';
       }
-      setMessageType(neededFinalGrade <= 70 ? 'success' : neededFinalGrade <= 90 ? 'warning' : 'error');
+      setMessageType(
+        neededFinalGrade <= 70
+          ? 'success'
+          : neededFinalGrade <= 90
+          ? 'warning'
+          : 'error'
+      );
     } else {
-      message = `Necesitarías: ${neededFinalGrade.toFixed(1)}% en el examen final. ¡Esto es imposible de alcanzar! Considera ajustar tu meta.`;
+      message = `Necesitarías: ${neededFinalGrade.toFixed(
+        1
+      )}% en el examen final. ¡Esto es imposible de alcanzar! Considera ajustar tu meta.`;
       setMessageType('error');
     }
 
@@ -63,11 +72,19 @@ const FinalExamCalculator = () => {
   };
 
   return (
-    <Box sx={{  px: 2, width: '100%' }}>
-      <Grid container spacing={4} justifyContent="center">
-        {/* Calculator Section */}
-        <Grid item xs={12} md={6}>
-          <Paper elevation={2} sx={{ p: 3, borderRadius: 2 }}>
+    <Container maxWidth="100%" padding='0px'  sx={{ mt: 3 }}>
+      {/* Flex wrapper */}
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: { xs: 'column', md: 'row' }, // stacked on mobile, row on desktop
+          gap: 4,
+          alignItems: 'flex-start',
+        }}
+      >
+        {/* Left (Calculator) */}
+        <Box sx={{ flex: { xs: '1 1 100%', md: '2 1 0' }, minWidth: 0 }}>
+          <Paper elevation={2} sx={{ p: 2, borderRadius: 2 }}>
             <Typography variant="h6" gutterBottom>
               ¿Cuánto Necesito para el Final?
             </Typography>
@@ -112,42 +129,37 @@ const FinalExamCalculator = () => {
                 margin="normal"
                 required
               />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 2 }}
-              >
+              <Button type="submit" fullWidth variant="contained" sx={{ mt: 2 }}>
                 Calcular
               </Button>
             </form>
           </Paper>
-        </Grid>
+        </Box>
 
-        {/* Result Section */}
-        <Grid item xs={12} md={5}>
+        {/* Right (Result) */}
+        <Box sx={{ flex: { xs: '1 1 100%', md: '1 1 0' }, minWidth: 0 }}>
           {result && (
-            <Alert severity={messageType} variant="filled" sx={{ fontSize: 16 }}>
+            <Alert severity={messageType} variant="filled" sx={{ fontSize: 16, mb: 2 }}>
               {result}
             </Alert>
           )}
-
-          <Box mt={3}>
-            <Paper elevation={1} sx={{ p: 2, borderRadius: 2, backgroundColor: '#ebf8ff' }}>
-              <Typography variant="body1" fontWeight={600} color="primary">
-                ¿Cómo usar?
-              </Typography>
-              <Typography variant="body2" mt={1}>
-                1. Ingresa tu nota actual promedio<br />
-                2. Especifica la nota que quieres obtener<br />
-                3. Indica qué porcentaje representan tus notas actuales<br />
-                4. Indica qué porcentaje representa el examen final
-              </Typography>
-            </Paper>
-          </Box>
-        </Grid>
-      </Grid>
-    </Box>
+          <Paper
+            elevation={1}
+            sx={{ p: 2, borderRadius: 2, backgroundColor: '#ebf8ff' }}
+          >
+            <Typography variant="body1" fontWeight={600} color="primary">
+              ¿Cómo usar?
+            </Typography>
+            <Typography variant="body2" mt={1}>
+              1. Ingresa tu nota actual promedio <br />
+              2. Especifica la nota que quieres obtener <br />
+              3. Indica qué porcentaje representan tus notas actuales <br />
+              4. Indica qué porcentaje representa el examen final
+            </Typography>
+          </Paper>
+        </Box>
+      </Box>
+    </Container>
   );
 };
 

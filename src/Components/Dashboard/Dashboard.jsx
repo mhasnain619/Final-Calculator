@@ -93,16 +93,16 @@ function Dashboard(props) {
                             <Button
                                 key={item.name}
                                 sx={{
-                color: '#fff',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 1.2,
-                textTransform: 'none', // Keep original case
-                fontSize: '1rem'
-            }}
+                                    color: '#fff',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: 1.2,
+                                    textTransform: 'none', // Keep original case
+                                    fontSize: '1rem'
+                                }}
                                 onClick={() => navigate(item.route)}
                             >
-                                 {item.icon}
+                                {item.icon}
                                 {item.name}
                             </Button>
                         ))}
@@ -140,8 +140,9 @@ function Dashboard(props) {
                 </Drawer>
             </nav>
             <Box
+             className='main-box'
                 component="main"
-                sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+                sx={{ flexGrow: 1, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
             >
                 <Toolbar />
                 <Outlet /> {/* Pages render here */}

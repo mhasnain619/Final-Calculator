@@ -41,15 +41,52 @@ const Home = () => {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+      {/* Tabs Container */}
+      <Box
+        sx={{
+          borderBottom: 1,
+          borderColor: 'divider',
+          overflowX: 'auto',       // enable horizontal scroll
+          '&::-webkit-scrollbar': { display: 'none' }, // hide scrollbar
+        }}
+      >
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="custom tabs"
+          variant="scrollable"    // make tabs scrollable
+          scrollButtons="auto"
+          textColor="primary"
+          indicatorColor="primary"
+          sx={{
+            '& .MuiTab-root': {
+              fontWeight: 500,
+              textTransform: 'none',
+              fontSize: '1rem',
+              color: 'text.secondary',
+              minWidth: 120,      // each tab width
+            },
+            '& .Mui-selected': {
+              color: 'primary.main',
+              fontWeight: 'bold',
+            },
+            '& .MuiTabs-indicator': {
+              height: 3,
+              borderRadius: 2,
+            },
+          }}
+        >
           <Tab label="Item One" {...a11yProps(0)} />
           <Tab label="Item Two" {...a11yProps(1)} />
           <Tab label="Item Three" {...a11yProps(2)} />
+          <Tab label="Extra Long Tab" {...a11yProps(3)} />
+          <Tab label="Another Tab" {...a11yProps(4)} />
         </Tabs>
       </Box>
+
+      {/* Panels */}
       <CustomTabPanel value={value} index={0}>
-        <FinalExamCalculator/>
+        <FinalExamCalculator />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
         Item Two
