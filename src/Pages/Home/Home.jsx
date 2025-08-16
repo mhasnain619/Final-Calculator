@@ -40,21 +40,26 @@ const Home = () => {
   };
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box>
       {/* Tabs Container */}
       <Box
         sx={{
           borderBottom: 1,
           borderColor: 'divider',
-          overflowX: 'auto',       // enable horizontal scroll
-          '&::-webkit-scrollbar': { display: 'none' }, // hide scrollbar
+          overflowX: 'auto',
+          display: 'flex',
+          flexDirection:'column',
+          justifyContent:'center'       // enable horizontal scroll
         }}
       >
+        <Box>
+          <h1 style={{textAlign:'center'}}>Calculadora de Notas</h1>
+        </Box>
         <Tabs
           value={value}
           onChange={handleChange}
           aria-label="custom tabs"
-          variant="scrollable"    // make tabs scrollable
+          variant="scrollable"    // sirf Tabs scrollable
           scrollButtons="auto"
           textColor="primary"
           indicatorColor="primary"
@@ -64,7 +69,7 @@ const Home = () => {
               textTransform: 'none',
               fontSize: '1rem',
               color: 'text.secondary',
-              minWidth: 120,      // each tab width
+              minWidth: 120, // tab ki min width set
             },
             '& .Mui-selected': {
               color: 'primary.main',
@@ -76,23 +81,16 @@ const Home = () => {
             },
           }}
         >
+          <Tab label="Final Calcultor" {...a11yProps(0)} />
           <Tab label="Item One" {...a11yProps(0)} />
-          <Tab label="Item Two" {...a11yProps(1)} />
-          <Tab label="Item Three" {...a11yProps(2)} />
-          <Tab label="Extra Long Tab" {...a11yProps(3)} />
-          <Tab label="Another Tab" {...a11yProps(4)} />
+          <Tab label="Item One" {...a11yProps(0)} />
         </Tabs>
+
       </Box>
 
       {/* Panels */}
       <CustomTabPanel value={value} index={0}>
         <FinalExamCalculator />
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={1}>
-        Item Two
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={2}>
-        Item Three
       </CustomTabPanel>
     </Box>
   );

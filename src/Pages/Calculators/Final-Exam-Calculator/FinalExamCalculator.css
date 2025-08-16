@@ -1,12 +1,30 @@
 .css-19kzrtu,
-.css-1p37nlf-MuiContainer-root{
+.css-1p37nlf-MuiContainer-root {
   padding: 0px !important;
 }
 
-@media only screen and (max-width: 600px) {
-.tool,
-.result{
-  width: 60%;
+.main-container {
+  display: flex;
+  gap: 20px;
 }
+
+.tool,.result {
+  width: 50%;
+}
+
+.button-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+@media only screen and (max-width: 600px) {
+  .main-container {
+    flex-direction: column;
+  }
+
+  .tool,.result {
+    width: 100%;
+  }
 
 }
