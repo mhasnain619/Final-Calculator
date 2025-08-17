@@ -1,5 +1,42 @@
-.css-hzcega-MuiTabs-list{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+/* Prevent entire body from horizontal scrolling */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Ensure the tab strip doesn’t push page width */
+.MuiTabs-root {
+  max-width: 100vw !important;
+}
+
+
+/* Make sure no max-width/margins on the tabs element clamp it */
+.custom-tabs {
+  max-width: none !important;
+  margin: 0 !important;
+}
+
+/* Optional: nice thin horizontal scrollbar just for the tabs row */
+.MuiTabs-root::-webkit-scrollbar {
+  height: 6px;
+}
+.MuiTabs-root::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,.25);
+  border-radius: 4px;
+}
+.MuiTabs-root {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0,0,0,.25) transparent;
+}
+
+
+
+@media only screen and (max-width: 600px) {
+  .tool-box{
+    margin-left: -10px;
+}
+
 }

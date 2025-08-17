@@ -1,97 +1,93 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, Tabs, Tab } from '@mui/material';
+import { Box, Tabs, Tab, Typography } from '@mui/material';
 import FinalExamCalculator from '../Calculators/Final-Exam-Calculator/FinalExamCalculator';
-import './Home.css'
+import GradeAverage from '../Calculators/Average-Grades/Average-Grades';
+import './Home.css';
+import WeightedGrades from '../Calculators/Weighted-Grades/Weighted-Grades';
+
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
-
   return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
-    </div>
+    <Box role="tabpanel" hidden={value !== index} {...other}>
+      {value === index && <Box className='tool-box' sx={{ p: { xs: 1.5, sm: 2 }, }}>{children}</Box>}
+    </Box>
   );
 }
+CustomTabPanel.propTypes = { children: PropTypes.node, index: PropTypes.number.isRequired, value: PropTypes.number.isRequired };
 
-CustomTabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
-};
-
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
+const a11yProps = (index) => ({
+  id: `simple-tab-${index}`,
+  'aria-controls': `simple-tabpanel-${index}`,
+});
 
 const Home = () => {
   const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  const handleChange = (_e, newValue) => setValue(newValue);
 
   return (
-    <Box>
-      {/* Tabs Container */}
+    <Box sx={{ width: '100%' }}>
+      {/* Header */}
+      <Box sx={{ px: { xs: 1, sm: 2 }, pt: 1 }}>
+        <Typography variant="h5" align="center" sx={{ fontWeight: 700 }}>
+          Calculadora de Notas
+        </Typography>
+      </Box>
+
+      {/* Tabs strip with its own horizontal scroll */}
       <Box
         sx={{
+          mt: 1,
           borderBottom: 1,
           borderColor: 'divider',
+          width: '100%',
+          maxWidth: '100vw',
           overflowX: 'auto',
-          display: 'flex',
-          flexDirection:'column',
-          justifyContent:'center'      
+          overflowY: 'hidden',
+          WebkitOverflowScrolling: 'touch',
+          px: 0,   // ❌ remove padding here to avoid horizontal scroll
         }}
       >
-        <Box>
-          <h1 style={{textAlign:'center'}}>Calculadora de Notas</h1>
-        </Box>
         <Tabs
-          className='custom-tabs'
           value={value}
           onChange={handleChange}
-          aria-label="custom tabs"
-          variant="scrollable"    // sirf Tabs scrollable
+          variant="scrollable"
           scrollButtons="auto"
-          textColor="primary"
-          indicatorColor="primary"
+          allowScrollButtonsMobile
+          aria-label="calculator tabs"
           sx={{
+            width: 'max-content',
+            minWidth: 'max-content',
+            '& .MuiTabs-flexContainer': { flexWrap: 'nowrap' },
             '& .MuiTab-root': {
               fontWeight: 500,
               textTransform: 'none',
-              fontSize: '1rem',
-              color: 'text.secondary',
-              minWidth: 120, // tab ki min width set
-            },
-            '& .Mui-selected': {
-              color: 'primary.main',
-              fontWeight: 'bold',
-            },
-            '& .MuiTabs-indicator': {
-              height: 3,
-              borderRadius: 2,
+              fontSize: { xs: '0.9rem', sm: '1rem' },
+              minWidth: { xs: 120, sm: 140 },
+              px: { xs: 1, sm: 2 },
+              flexShrink: 0,
             },
           }}
         >
-          <Tab label="Final Calcultor" {...a11yProps(0)} />
-          <Tab label="Item One" {...a11yProps(0)} />
-          <Tab label="Item One" {...a11yProps(0)} />
+          <Tab label="Final Calculator" {...a11yProps(0)} />
+          <Tab label="Grade Average" {...a11yProps(1)} />
+          <Tab label="Item One" {...a11yProps(2)} />
+          <Tab label="Item Two" {...a11yProps(3)} />
         </Tabs>
-
       </Box>
 
       {/* Panels */}
       <CustomTabPanel value={value} index={0}>
         <FinalExamCalculator />
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={1}>
+        <GradeAverage />
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={2}>
+        <WeightedGrades />
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={3}>
+        Item Two
       </CustomTabPanel>
     </Box>
   );
